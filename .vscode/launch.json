@@ -1,0 +1,75 @@
+// Switch between steps
+function nextStep(step) {
+  "configurations": 
+
+  ]
+  document.querySelectorAll('.step').forEach(s => s.classList.add('hidden'));
+  document.getElementById(`step${step}`).classList.remove('hidden');
+
+  // Trigger confetti on final step
+  if (step === 5) {
+    startConfetti();
+  }
+}
+
+// Floating hearts
+function createHearts() {
+  const hearts = document.getElementById('hearts');
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+    hearts.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }, 500);
+}
+createHearts();
+
+// Confetti
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const confetti = [];
+  for (let i = 0; i < 300; i++) {
+    confetti.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      r: Math.random() * 6 + 4,
+      d: Math.random() * 10 + 5,
+      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+      tilt: Math.random() * 10 - 10,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confetti.forEach(p => {
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+      ctx.fill();
+    });
+    update();
+  }
+
+  function update() {
+    confetti.forEach(p => {
+      p.y += p.d / 2;
+      p.x += Math.sin(p.tilt);
+      if (p.y > canvas.height) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+  }
+
+  setInterval(draw, 20);
+}

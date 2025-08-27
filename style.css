@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Bodoni Moda', serif;
+}
+
+body {
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+}
+
+/* Background video */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+}
+
+/* Flip card container */
+.container {
+    perspective: 1000px;
+}
+
+/* Flip cards */
+.card {
+    width: 280px;
+    height: 360px;
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    transition: 2s;
+    transform-style: preserve-3d;
+}
+.card:hover {
+    transform: rotateY(180deg);
+}
+
+/* Second flip card placement */
+.second-card {
+    left: 500px; /* move right */
+}
+
+/* Card faces */
+.outside, .inside {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 1.5rem;
+    position: absolute;
+    backface-visibility: hidden;
+}
+.outside {
+    background-color: blanchedalmond;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+}
+.outside h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: salmon;
+    margin-bottom: 20px;
+}
+.inside {
+    background-color: rgb(255, 244, 79);
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+    transform: rotateY(180deg);
+}
+.inside h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Cake video inside card */
+.cake-video {
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Extra image inside flip card */
+.extra-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Carousel container */
+.carousel {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Carousel frames */
+.frames {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.4);
+    animation: slide 9s infinite;
+}
+.frames img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+.frames p {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Carousel animation */
+@keyframes slide {
+    0%, 20%   { transform: translateY(0); }
+    33%, 53%  { transform: translateY(-160px); }
+    66%, 86%  { transform: translateY(-320px); }
+    100%      { transform: translateY(0); }
+}
